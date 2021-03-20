@@ -269,7 +269,7 @@
 						<ul class="post-job-bx">
 <?php
 
- $sql = "SELECT jobId,jobCategory, jobDeadline, jobAddress, jobSalary,jobTitle,jobPostedBy, jobExperience,jobPostedOn, jobTiming FROM jobs ORDER BY jobId DESC";
+ $sql = "SELECT jobId,jobCategory, jobDeadline, jobAddress, jobSalary,jobExperience,jobTitle,jobDescription,jobApplyProcess,jobRequirements,jobPostedBy,jobPostedOn,jobBanner FROM jobs ORDER BY jobId DESC";
 	if($stmt = $mysqli->prepare($sql)){
 		// Bind variables to the prepared statement as parameters
 		#$stmt->bind_param("i", $param_jobId);
@@ -287,7 +287,7 @@
 				$jobSalary=$row['jobSalary'];
 				$jobDeadline=$row['jobDeadline'];
 				$jobPostedOn=$row['jobPostedOn'];
-				$jobTiming=$row['jobTiming'];
+				
 ?>
 							<li>
 								<a href="#">
@@ -299,7 +299,7 @@
 											<h4><?php echo $jobTitle?></h4>
 											<ul>
 												<li><i class="fa fa-map-marker"></i><?php echo $jobAddress ?></li>
-												<li><i class="fa fa-bookmark-o"></i><?php echo $jobTiming ?></li>
+												<li><i class="fa fa-bookmark-o"></i>jj</li>
 												<li><i class="fa fa-clock-o"></i> Posted On <?php echo $jobPostedOn ?></li>
 												<li><i class="fa fa-clock-o"></i> Deadline  <?php echo $jobDeadline ?></li><br>
 											</ul>

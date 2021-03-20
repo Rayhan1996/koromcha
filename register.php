@@ -173,9 +173,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     <label class="font-weight-700">ACCOUNT TYPE *</label>
                                         <select name="user_type">
                                             <option value="">Select User Type</option>
-                                            <option value=1>Buyer</option>
-                                            <option value=2>Seller</option>
-                                            <option value=3>Admin</option>
+                                            <option value=1>Admin</option>
+                                            <option value=2>Buyer</option>
+                                            <option value=3>Seller</option>
                                         </select>
                                     </div>
 									<div class="text-left">

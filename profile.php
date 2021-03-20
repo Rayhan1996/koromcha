@@ -134,6 +134,7 @@ if($userType==3){
                     if($userType==1){
                         ?>
                      <h2 class="m-b5">Jobs recently approve by you</h2>
+                     
                     <h5 class="fw4 m-b0">Total jobs 44</h5>
                         <?php
                     }
@@ -141,12 +142,14 @@ if($userType==3){
                         ?>
                         <h2 class="m-b5">Jobs recently posted by you</h2>
                         <h5 class="fw4 m-b0">Total jobs 22</h5>
+                        <a href="post-job.php?userId=<?php echo $_SESSION["userId"];?>">Post A New job</a>
                            <?php
                     }
                     if($userType==3){
                         ?>
-                        <h2 class="m-b5">Jobs recently applied by you</h2>
+                        <h2 class="m-b5">Jobs recently applied by <?php echo $_SESSION["firstname"];?></h2>
                        <h5 class="fw4 m-b0">Total jobs 22</h5>
+                       
                            <?php
                     }
                     
@@ -159,8 +162,12 @@ if($userType==3){
                     <ul class="post-job-bx">
 <?php
 
-$sql = "SELECT jobId,jobCategory, jobDeadline, jobAddress, jobSalary,jobTitle,jobPostedBy, jobExperience,jobPostedOn, jobTiming FROM jobs ORDER BY jobId DESC";
+$sql = "SELECT jobId,jobCategory, jobDeadline, jobAddress, jobSalary,jobExperience,jobTitle,jobDescription,jobApplyProcess,jobRequirements,jobPostedBy,jobPostedOn,jobBanner FROM jobs WHERE jobPostedBy=? ORDER BY jobId DESC";
    if($stmt = $mysqli->prepare($sql)){
+    $stmt->bind_param("i", $param_userId);
+
+    // Set parameters
+    $param_userId = $_GET['userId'];
        // Bind variables to the prepared statement as parameters
        #$stmt->bind_param("i", $param_jobId);
 
@@ -177,7 +184,7 @@ $sql = "SELECT jobId,jobCategory, jobDeadline, jobAddress, jobSalary,jobTitle,jo
                $jobSalary=$row['jobSalary'];
                $jobDeadline=$row['jobDeadline'];
                $jobPostedOn=$row['jobPostedOn'];
-               $jobTiming=$row['jobTiming'];
+               
 ?>
                         <li>
                             <a href="#">
@@ -189,7 +196,7 @@ $sql = "SELECT jobId,jobCategory, jobDeadline, jobAddress, jobSalary,jobTitle,jo
                                         <h4><?php echo $jobTitle ?></h4>
                                         <ul>
                                             <li><i class="fa fa-map-marker"></i><?php echo $jobAddress ?></li>
-                                            <li><i class="fa fa-bookmark-o"></i><?php echo $jobTiming ?></li>
+                                            <li><i class="fa fa-bookmark-o"></i>f</li>
                                             <li><i class="fa fa-clock-o"></i> Posted On <?php echo $jobPostedOn ?></li>
                                             <li><i class="fa fa-clock-o"></i> Deadline <?php echo $jobDeadline ?></li><br>
                                         </ul>
