@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2021 at 06:45 PM
+-- Generation Time: Mar 23, 2021 at 07:44 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -33,6 +33,10 @@ CREATE TABLE `admins` (
   `profilePicture` varchar(255) NOT NULL,
   `profileTitle` varchar(255) NOT NULL,
   `profileDescription` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `portfolioLink` varchar(255) NOT NULL,
+  `rate` int(11) NOT NULL,
+  `skill` varchar(255) NOT NULL,
   `lastLogin` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -40,10 +44,9 @@ CREATE TABLE `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`adminId`, `userId`, `profilePicture`, `profileTitle`, `profileDescription`, `lastLogin`) VALUES
-(1, 1, 'rabbe.jpg', 'senior developer', 'highly skilled in php', '2021-02-15'),
-(2, 2, 'rajibul.jpg', 'senior developer', 'highly skilled in java', '2021-02-14'),
-(3, 5, 'ashik.jpg', 'junior developer', 'highly skilled in seo', '2021-02-11');
+INSERT INTO `admins` (`adminId`, `userId`, `profilePicture`, `profileTitle`, `profileDescription`, `address`, `portfolioLink`, `rate`, `skill`, `lastLogin`) VALUES
+(5, 8, '', 'ee', '', 'ere', '', 0, '', '0000-00-00'),
+(6, 11, '', 'web', 'dfd', 'et', '', 0, '', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -69,6 +72,29 @@ INSERT INTO `admintypes` (`typeId`, `adminId`, `adminRoleName`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `apply`
+--
+
+CREATE TABLE `apply` (
+  `applyId` int(11) NOT NULL,
+  `applyJobId` int(11) NOT NULL,
+  `applyBy` int(11) NOT NULL,
+  `applyConfirm` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `apply`
+--
+
+INSERT INTO `apply` (`applyId`, `applyJobId`, `applyBy`, `applyConfirm`) VALUES
+(3, 8, 10, 0),
+(4, 8, 9, 0),
+(5, 8, 15, 0),
+(6, 9, 15, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `buyers`
 --
 
@@ -77,7 +103,7 @@ CREATE TABLE `buyers` (
   `userId` int(11) NOT NULL,
   `profilePicture` varchar(255) NOT NULL,
   `profileTitle` varchar(255) NOT NULL,
-  `profileDescriptions` varchar(255) NOT NULL,
+  `profileDescription` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `portfolioLink` varchar(255) NOT NULL,
   `rate` int(11) NOT NULL,
@@ -89,9 +115,11 @@ CREATE TABLE `buyers` (
 -- Dumping data for table `buyers`
 --
 
-INSERT INTO `buyers` (`buyerId`, `userId`, `profilePicture`, `profileTitle`, `profileDescriptions`, `address`, `portfolioLink`, `rate`, `skill`, `lastLogin`) VALUES
-(36, 1, 'rgrt', 'dfgfd', 'dfgfd', '', '', 0, '', '0000-00-00'),
-(37, 5, '', 'ee', 'dafd', 'ere', 'dsfdf', 4, 'dsfd', '0000-00-00');
+INSERT INTO `buyers` (`buyerId`, `userId`, `profilePicture`, `profileTitle`, `profileDescription`, `address`, `portfolioLink`, `rate`, `skill`, `lastLogin`) VALUES
+(38, 9, '', 'ee', '', 'ere', '', 0, '', '0000-00-00'),
+(39, 12, '', 'fgseg', 'dg', 'fsgsdfg', 'aefged', 0, '', '0000-00-00'),
+(40, 13, '', 'web01', 'sfdvsd', 'sdfsd', 'http://localhost/koromcha/profile-edit.php', 78, 'sfgsf', '0000-00-00'),
+(41, 14, '', 'dhd', 'gfhgf', 'fghgf', 'fgfhgf', 54, 'gngf', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -156,17 +184,24 @@ CREATE TABLE `jobs` (
   `jobRequirements` varchar(255) NOT NULL,
   `jobPostedBy` int(11) NOT NULL,
   `jobPostedOn` varchar(11) NOT NULL,
-  `jobTiming` varchar(11) NOT NULL
+  `jobBanner` varchar(255) NOT NULL,
+  `jobRunning` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `jobs`
 --
 
-INSERT INTO `jobs` (`jobId`, `jobCategory`, `jobDeadline`, `jobAddress`, `jobSalary`, `jobExperience`, `jobTitle`, `jobDescription`, `jobApplyProcess`, `jobRequirements`, `jobPostedBy`, `jobPostedOn`, `jobTiming`) VALUES
-(1, 'Web Developers', '28-Oct-2021', 'A/F west jalkuri, Narayangonj.', 100, 3, 'Junior Web developer', 'This Is job description. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks. ', 'This Is Job Apply. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.', 'This Is job requirements. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.', 30, ' 12 janu', 'Part Time'),
-(2, 'Marketing', '29-Oct-2021', '17/3 west kawran bazar, Dhaka-1215', 50, 2, 'Digital Marketing ', 'job Description 2. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.\r\n', 'Job apply process 2. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.\r\n', 'job requirements 2. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.\r\n', 32, '13 janu', 'Full Time'),
-(3, 'Marketing3', '30-Oct-2021', 'Job Address3. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.\r\n', 25, 1, 'Job Title3.', 'Job discriptions3. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.\r\n', 'Job Apply process3. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.\r\n', 'Job Requirments3. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.\r\n', 33, '14 janu', 'Part Time');
+INSERT INTO `jobs` (`jobId`, `jobCategory`, `jobDeadline`, `jobAddress`, `jobSalary`, `jobExperience`, `jobTitle`, `jobDescription`, `jobApplyProcess`, `jobRequirements`, `jobPostedBy`, `jobPostedOn`, `jobBanner`, `jobRunning`) VALUES
+(1, 'Web Developers', '28-Oct-2021', 'A/F west jalkuri, Narayangonj.', 100, 3, 'Junior Web developer', 'This Is job description. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks. ', 'This Is Job Apply. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.', 'This Is job requirements. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.', 30, ' 12 janu', '', 0),
+(2, 'Marketing', '29-Oct-2021', '17/3 west kawran bazar, Dhaka-1215', 50, 2, 'Digital Marketing ', 'job Description 2. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.\r\n', 'Job apply process 2. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.\r\n', 'job requirements 2. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.\r\n', 32, '13 janu', '', 0),
+(3, 'Marketing3', '30-Oct-2021', 'Job Address3. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.\r\n', 25, 1, 'Job Title3.', 'Job discriptions3. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.\r\n', 'Job Apply process3. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.\r\n', 'Job Requirments3. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.\r\n', 14, '14 janu', '', 0),
+(4, 'rg', 'ere', 're', 4, 534, 'tfr', 'dfrg', 'dfgd', 'dfgdf', 10, '2021-03-20', '20210104', 0),
+(5, 'rg', 'ere', 're', 4, 534, 'tfr', 'dfrg', 'dfgd', 'dfgdf', 10, '2021-03-20', '20210104', 0),
+(6, 'dfgds', '454', 'dfd', 0, 0, '', '', '', '', 12, '2021-03-20', '0', 0),
+(7, 'euiyhri', 'fdg', 'sfgfg', 356, 34, 'fgf', 'fgg', 'fgd', 'fggffd', 13, '2021-03-23', '0', 0),
+(8, 'new job', 'thgt', 'gfhfg', 5, 45, 'bgg', 'gbgf', 'fgh', 'cbg', 14, '2021-03-23', '0', 1),
+(9, 'yyy', 'tuy', '', 0, 0, '', '', '', '', 14, '2021-03-23', '0', 1);
 
 -- --------------------------------------------------------
 
@@ -231,7 +266,11 @@ CREATE TABLE `sellers` (
   `userId` int(11) NOT NULL,
   `profilePicture` varchar(255) NOT NULL,
   `profileTitle` varchar(255) NOT NULL,
-  `profileDescriptions` varchar(255) NOT NULL,
+  `profileDescription` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `portfolioLink` varchar(255) NOT NULL,
+  `rate` int(11) NOT NULL,
+  `skill` varchar(255) NOT NULL,
   `lastLogin` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -239,10 +278,9 @@ CREATE TABLE `sellers` (
 -- Dumping data for table `sellers`
 --
 
-INSERT INTO `sellers` (`sellerId`, `userId`, `profilePicture`, `profileTitle`, `profileDescriptions`, `lastLogin`) VALUES
-(1, 1, 'manik.jpg', 'sales Executive', 'active and punctual', '2021-02-09'),
-(2, 2, 'rajia.jpg', 'sales Executive', 'active and punctual', '2021-02-17'),
-(3, 3, 'rafia.jpg', 'sales Executive', 'active and punctual', '2021-02-18');
+INSERT INTO `sellers` (`sellerId`, `userId`, `profilePicture`, `profileTitle`, `profileDescription`, `address`, `portfolioLink`, `rate`, `skill`, `lastLogin`) VALUES
+(4, 10, '', 'ee', '', '', '', 0, '', '0000-00-00'),
+(5, 15, '', 'ee', '', 'rte', 'ret', 0, '', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -264,9 +302,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userId`, `firstname`, `lastname`, `email`, `password`, `userType`) VALUES
-(2, 's', 's', 'shahin@gmail.com', '$2y$10$apRV4TvM9cAgGdAn/F2O..N5VHcYYvLmVc9q1neKS3NXgX2e1fym2', 2),
-(3, 's', 's', 'ahnabshahin@gmail.com', '$2y$10$po/Hnzp1EtAAWQhvXqBf3uTgiUPdeShiZ730JzDAQ3OuoUchkrCQO', 1),
-(5, 'shahin', 'alam', 'shahin12@gmail.com', '$2y$10$kRaONlUwmDzQii2/u4gEVegYbznbg0p9zv3J8wkjd4ghuuh2n6BBe', 1);
+(8, 'Shahin', 'Alam', 'shahin@gmail.com', '$2y$10$rFhnO2EP1e.Ujcx7DO5BPeuTYbdNpmNrkpOB0ivNwIuiFK4uDc7Li', 1),
+(9, 'bonga', 'bonga', 'bonga@gmail.com', '$2y$10$yghSypTvjLRTAouintXqJO9TdFnFGk0RBTw./z9nMETuAJSqqbNUu', 3),
+(10, 'seller', 'seller', 'seller@gmail.com', '$2y$10$Mg/bJbCtr.k3d2StGuhgV.7Vh6VvaqQLsk0aIAVJ/nn1YUkNqJpXq', 3),
+(11, 'orun ', 'sunny', 'orun@gmail.com', '$2y$10$Qy2PVnMwP8wHxHDO0Uq.3.t1BCCWCrZkLB4JA4YteK3xTXPB9AK7e', 1),
+(12, 'ftrt', 'rtrt', 'sunny@gmail.com', '$2y$10$GeaAspKyFplWdFEOs3XPPe5Ooj68vyyrF5CNN4G1jKAom8pPKK2/2', 2),
+(13, 'joybangla', 'kl', 'joybangla@gmail.com', '$2y$10$hIrwu1bb6DLaGKpJnb3FXum7ngLrf3DoqADfsf0hmYb5gfw4CeAWK', 2),
+(14, 'buyer', 'buyer', 'buyer@gmail.com', '$2y$10$avZYO9f.O28YL1w3Xi441./F6JeQb.V6LrE6rSAPVhCKIX2uH6V4i', 2),
+(15, 'seller1', 'seller1', 'seller1@gmail.com', '$2y$10$1Ah5vdFmAZjU73MtV/zC2uJB/GTxYSxS/h6C60jhL.mZlr4aNie2O', 3);
 
 -- --------------------------------------------------------
 
@@ -303,6 +346,12 @@ ALTER TABLE `admins`
 --
 ALTER TABLE `admintypes`
   ADD PRIMARY KEY (`typeId`);
+
+--
+-- Indexes for table `apply`
+--
+ALTER TABLE `apply`
+  ADD PRIMARY KEY (`applyId`);
 
 --
 -- Indexes for table `buyers`
@@ -367,7 +416,7 @@ ALTER TABLE `usertypes`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `adminId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `adminId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `admintypes`
@@ -376,10 +425,16 @@ ALTER TABLE `admintypes`
   MODIFY `typeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `apply`
+--
+ALTER TABLE `apply`
+  MODIFY `applyId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `buyers`
 --
 ALTER TABLE `buyers`
-  MODIFY `buyerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `buyerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `discounts`
@@ -397,7 +452,7 @@ ALTER TABLE `guests`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `jobId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `jobId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `offers`
@@ -415,13 +470,13 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `sellers`
 --
 ALTER TABLE `sellers`
-  MODIFY `sellerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `sellerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `usertypes`
