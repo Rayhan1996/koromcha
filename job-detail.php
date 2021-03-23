@@ -120,7 +120,7 @@ if(is_null($_SESSION["loggedin"])){
 									<li><?php echo $jobRequirements ?></li>
 
 								</ul>
-								<a href="#" class="site-button">Apply This Job</a>
+								<a href="apply.php?jobId=<?php echo $param_jobId ?>" class="site-button">Apply This Job</a>
 							</div>
 						</div>
 					</div>
@@ -148,7 +148,7 @@ if(is_null($_SESSION["loggedin"])){
                                          <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.</p>
                                     </div>
                                    <div class="dez-post-readmore"> 
-										<a href="#" class="site-button outline">Apply Now <i class="ti-arrow-right"></i></a>
+										<a href="" class="site-button outline">Apply Now <i class="ti-arrow-right"></i></a>
 									</div>
                                 </div>
                             </div>
