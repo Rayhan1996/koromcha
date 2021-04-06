@@ -13141,4 +13141,9 @@ ol.commentlist li .star-rating {
 	bottom: 130px !important;
 }
 /* Support and Buy Button END */
+.p-cover{
 
+   
+    text-align: center;
+    color: red;
+}
